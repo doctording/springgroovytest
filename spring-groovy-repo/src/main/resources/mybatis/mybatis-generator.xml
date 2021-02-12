@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!--<properties resource="mybatis/generator.properties"></properties>-->
+    <!--驱动jar-->
+    <!--<classPathEntry location="${classPathEntry}"/>-->
+    <classPathEntry location="/Users/mubi/git_workspace/springgroovytest/spring-groovy-repo/src/main/libs/mysql-connector-java-5.1.20.jar"/>
+
+    <!--<context id="MysqlTables" targetRuntime="MyBatis3" ="hierarchical">-->
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--<jdbcConnection driverClass="${driverClass}"-->
+                        <!--connectionURL="${connectionURL}"-->
+                        <!--userId="${userId}"-->
+                        <!--password="${password}">-->
+        <!--</jdbcConnection>-->
+        <!--  <jdbcConnection driverClass="${datasource.driver}"
+                          connectionURL="${datasource.url}"
+                          userId="${datasource.username}"
+                          password="${datasource.password}">
+          </jdbcConnection>-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                         connectionURL="jdbc:mysql://localhost:3306/test?autoReconnect=true&amp;autoReconnectForPools=true&amp;useUnicode=true&amp;characterEncoding=utf-8"
+                         userId="root"
+                         password="123456">
+         </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+
+        <javaModelGenerator targetPackage="com.example.demorepo.repository.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="sqlmap"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.demorepo.repository.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <table tableName="tb_user" domainObjectName="TbUser">
+        </table>
+
+    </context>
+</generatorConfiguration>
