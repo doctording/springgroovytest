@@ -1,8 +1,10 @@
 package com.example.demoapi.control;
 
 import com.example.demoapi.util.SpringContextUtils;
+import com.example.service.HelloService;
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,9 @@ import java.lang.reflect.Method;
  */
 @RestController
 public class GroovyController {
+
+    @Autowired
+    private HelloService helloService;
 
     @PostMapping("/runScript")
     public Object runScript(String script) throws Exception {
@@ -37,20 +42,30 @@ public class GroovyController {
         }
     }
 
+    /**
+     * 修改hello.groovy，每次调用都生成新的对象 ==》即可以动态改变方法返回
+     * @param id
+     * @return
+     */
     @GetMapping(value = "/groovy/{id}")
     public String myTest1(@PathVariable String id){
         try {
             ClassLoader parent = this.getClass().getClassLoader();
             GroovyClassLoader loader = new GroovyClassLoader(parent);
-            Class groovyClass = loader.parseClass(
-                    new File("spring-groovy-api/src/main/java/com/example/demoapi/hello.groovy")
-            );
-
+            String path = "spring-groovy-api/src/main/java/com/example/demoapi/hello.groovy";
+            // 加载groovy文件得到Class
+            Class groovyClass = loader.parseClass(new File(path));
+            // 实例化对象并调用
             GroovyObject groovyObject = (GroovyObject)groovyClass.newInstance();
             String result = (String) groovyObject.invokeMethod("test", id);
             return result;
         } catch (Exception ex) {
             return ex.toString();
         }
+    }
+
+    @GetMapping(value = "/groovy-hello/{what}")
+    public String helloGroovy(@PathVariable String what){
+        return helloService.say(what);
     }
 }
