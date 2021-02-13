@@ -1,7 +1,9 @@
-package com.example.demoapi;
+package com.example.demoapi
 
 class MyHello {
-    static String test(String id){
-        return "hello:" + id;
+
+    static String test(String id) {
+        return "hello:" + id
     }
+
 }

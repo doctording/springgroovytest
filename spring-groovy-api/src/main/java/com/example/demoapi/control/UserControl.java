@@ -10,23 +10,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * @Author mubi
+ * @Date 2021/2/13 12:04
+ */
 @RestController
 public class UserControl {
     @Autowired
     TbUserService tbUserService;
 
     @GetMapping(value = "/test-service")
-    public String test() throws Exception {
+    public String test() {
         return tbUserService.fortest();
     }
 
     @GetMapping(value = "/user-all")
-    public List<TbUser> getTestAll() throws Exception {
+    public List<TbUser> getTestAll() {
         return tbUserService.getAllUsers();
     }
 
     @GetMapping(value = "/user-id/{id}")
-    public TbUser getById(@PathVariable Integer id) throws Exception {
+    public TbUser getById(@PathVariable Integer id) {
         return tbUserService.getById(id);
     }
 
