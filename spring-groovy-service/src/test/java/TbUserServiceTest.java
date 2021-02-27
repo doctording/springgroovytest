@@ -1,3 +1,4 @@
+import com.example.DemoServiceApplication;
 import com.example.demorepo.repository.model.TbUser;
 import com.example.service.TbUserService;
 import org.junit.Test;
@@ -9,9 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
-//@ContextConfiguration(classes = {DemoServiceApplication.class})
-public class DemoServiceApplicationTests {
+@SpringBootTest(classes = {DemoServiceApplication.class})
+public class TbUserServiceTest {
 
 	@Autowired
 	TbUserService tbUserService;

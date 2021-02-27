@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service(value = "tbUserService")
 public class TbUserServiceImpl implements TbUserService {
 
     @Autowired
