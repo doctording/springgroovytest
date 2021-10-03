@@ -1,5 +1,8 @@
 package com.example.demoapi.control;
 
+import com.example.demoapi.enums.CityEnum;
+import com.example.demoapi.enums.ColorEnum;
+import com.example.demoapi.enums.TypeEnum;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +19,21 @@ public class TestControl {
     @GetMapping(value = "/test")
     public String getTest() {
         return "hello test";
+    }
+
+    @GetMapping(value = "/test-enum-color")
+    public Object getTestColorEnum() {
+        return ColorEnum.values();
+    }
+
+    @GetMapping(value = "/test-enum-city")
+    public Object getTestCarEnum() {
+        return CityEnum.values();
+    }
+
+    @GetMapping(value = "/test-enum-type")
+    public Object getTestTypeEnum() {
+        return TypeEnum.values();
     }
 
     @GetMapping(value = "/test-cost")
